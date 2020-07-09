@@ -8,15 +8,15 @@ WHITE = "W"
 YELLOW = "Y"
 BLUE = "B"
 
-front = "Front"
-left = "Left"
-back = "Back"
-right = "Right"
-top = "Top"
-bottom = "Bottom"
+FRONT = "Front"
+LEFT = "Left"
+BACK = "Back"
+RIGHT = "Right"
+TOP = "Top"
+BOTTOM = "Bottom"
 
-clockwise_axes = (1, 0)
-counterclockwise_axes = (0, 1)
+CLOCKWISE = (1, 0)
+COUNTERCLOCKWISE = (0, 1)
 
 
 class Cube:
@@ -24,12 +24,12 @@ class Cube:
     def __init__(self):
 
         self.faces = {
-            front: np.full((3, 3), GREEN),
-            left: np.full((3, 3), ORANGE),
-            right: np.full((3, 3), RED),
-            top: np.full((3, 3), WHITE),
-            bottom: np.full((3, 3), YELLOW),
-            back: np.full((3, 3), BLUE),
+            FRONT: np.full((3, 3), GREEN),
+            LEFT: np.full((3, 3), ORANGE),
+            RIGHT: np.full((3, 3), RED),
+            TOP: np.full((3, 3), WHITE),
+            BOTTOM: np.full((3, 3), YELLOW),
+            BACK: np.full((3, 3), BLUE),
         }
 
         self.moves_lookup = {
@@ -86,34 +86,34 @@ class Cube:
     # X Axis movements - D, E and U
     # ------------------------------------------------------------------------------------
     def D(self):
-        self.faces[bottom] = np.rot90(self.faces[bottom], axes=clockwise_axes)
-        self.__swap_x((front, 2), (right, 2), (back, 2), (left, 2))
+        self.faces[BOTTOM] = np.rot90(self.faces[BOTTOM], axes=CLOCKWISE)
+        self.__swap_x((FRONT, 2), (RIGHT, 2), (BACK, 2), (LEFT, 2))
 
     def D_prime(self):
-        self.faces[bottom] = np.rot90(self.faces[bottom], axes=counterclockwise_axes)
-        self.__swap_x((front, 2), (left, 2), (back, 2), (right, 2))
+        self.faces[BOTTOM] = np.rot90(self.faces[BOTTOM], axes=COUNTERCLOCKWISE)
+        self.__swap_x((FRONT, 2), (LEFT, 2), (BACK, 2), (RIGHT, 2))
 
     def D2(self):
         self.D()
         self.D()
 
     def E(self):
-        self.__swap_x((front, 1), (right, 1), (back, 1), (left, 1))
+        self.__swap_x((FRONT, 1), (RIGHT, 1), (BACK, 1), (LEFT, 1))
 
     def E_prime(self):
-        self.__swap_x((front, 1), (left, 1), (back, 1), (right, 1))
+        self.__swap_x((FRONT, 1), (LEFT, 1), (BACK, 1), (RIGHT, 1))
 
     def E2(self):
         self.E()
         self.E()
 
     def U(self):
-        self.faces[top] = np.rot90(self.faces[top], axes=clockwise_axes)
-        self.__swap_x((front, 0), (left, 0), (back, 0), (right, 0))
+        self.faces[TOP] = np.rot90(self.faces[TOP], axes=CLOCKWISE)
+        self.__swap_x((FRONT, 0), (LEFT, 0), (BACK, 0), (RIGHT, 0))
 
     def U_prime(self):
-        self.faces[top] = np.rot90(self.faces[top], axes=counterclockwise_axes)
-        self.__swap_x((front, 0), (right, 0), (back, 0), (left, 0))
+        self.faces[TOP] = np.rot90(self.faces[TOP], axes=COUNTERCLOCKWISE)
+        self.__swap_x((FRONT, 0), (RIGHT, 0), (BACK, 0), (LEFT, 0))
 
     def U2(self):
         self.U()
@@ -141,34 +141,34 @@ class Cube:
     # Y Axis movements - L, R and M
     # ------------------------------------------------------------------------------------
     def L(self):
-        self.faces[left] = np.rot90(self.faces[left], axes=clockwise_axes)
-        self.__swap_y((bottom, 0, True), (back, 2, True), (top, 0, False), (front, 0, False))
+        self.faces[LEFT] = np.rot90(self.faces[LEFT], axes=CLOCKWISE)
+        self.__swap_y((BOTTOM, 0, True), (BACK, 2, True), (TOP, 0, False), (FRONT, 0, False))
 
     def L_prime(self):
-        self.faces[left] = np.rot90(self.faces[left], axes=counterclockwise_axes)
-        self.__swap_y((bottom, 0, False), (front, 0, False), (top, 0, True), (back, 2, True))
+        self.faces[LEFT] = np.rot90(self.faces[LEFT], axes=COUNTERCLOCKWISE)
+        self.__swap_y((BOTTOM, 0, False), (FRONT, 0, False), (TOP, 0, True), (BACK, 2, True))
 
     def L2(self):
         self.L()
         self.L()
 
     def M(self):
-        self.__swap_y((bottom, 1, True), (back, 1, True), (top, 1, False), (front, 1, False))
+        self.__swap_y((BOTTOM, 1, True), (BACK, 1, True), (TOP, 1, False), (FRONT, 1, False))
 
     def M_prime(self):
-        self.__swap_y((bottom, 1, False), (front, 1, False), (top, 1, True), (back, 1, True))
+        self.__swap_y((BOTTOM, 1, False), (FRONT, 1, False), (TOP, 1, True), (BACK, 1, True))
 
     def M2(self):
         self.M()
         self.M()
 
     def R(self):
-        self.faces[right] = np.rot90(self.faces[right], axes=clockwise_axes)
-        self.__swap_y((bottom, 2, False), (front, 2, False), (top, 2, True), (back, 0, True))
+        self.faces[RIGHT] = np.rot90(self.faces[RIGHT], axes=CLOCKWISE)
+        self.__swap_y((BOTTOM, 2, False), (FRONT, 2, False), (TOP, 2, True), (BACK, 0, True))
 
     def R_prime(self):
-        self.faces[right] = np.rot90(self.faces[right], axes=counterclockwise_axes)
-        self.__swap_y((bottom, 2, True), (back, 0, True), (top, 2, False), (front, 2, False))
+        self.faces[RIGHT] = np.rot90(self.faces[RIGHT], axes=COUNTERCLOCKWISE)
+        self.__swap_y((BOTTOM, 2, True), (BACK, 0, True), (TOP, 2, False), (FRONT, 2, False))
 
     def R2(self):
         self.R()
@@ -208,34 +208,34 @@ class Cube:
     # Z Axis movements - B and F
     # ------------------------------------------------------------------------------------
     def B(self):
-        self.faces[back] = np.rot90(self.faces[back], axes=clockwise_axes)
-        self.__swap_z((bottom, 2, True), (right, 2, False), (top, 0, True), (left, 0, False))
+        self.faces[BACK] = np.rot90(self.faces[BACK], axes=CLOCKWISE)
+        self.__swap_z((BOTTOM, 2, True), (RIGHT, 2, False), (TOP, 0, True), (LEFT, 0, False))
 
     def B_prime(self):
-        self.faces[back] = np.rot90(self.faces[back], axes=counterclockwise_axes)
-        self.__swap_z((bottom, 2, False), (left, 0, True), (top, 0, False), (right, 2, True))
+        self.faces[BACK] = np.rot90(self.faces[BACK], axes=COUNTERCLOCKWISE)
+        self.__swap_z((BOTTOM, 2, False), (LEFT, 0, True), (TOP, 0, False), (RIGHT, 2, True))
 
     def B2(self):
         self.B()
         self.B()
 
     def F(self):
-        self.faces[front] = np.rot90(self.faces[front], axes=clockwise_axes)
-        self.__swap_z((bottom, 0, False), (left, 2, True), (top, 2, False), (right, 0, True))
+        self.faces[FRONT] = np.rot90(self.faces[FRONT], axes=CLOCKWISE)
+        self.__swap_z((BOTTOM, 0, False), (LEFT, 2, True), (TOP, 2, False), (RIGHT, 0, True))
 
     def F_prime(self):
-        self.faces[front] = np.rot90(self.faces[front], axes=counterclockwise_axes)
-        self.__swap_z((bottom, 0, True), (right, 0, False), (top, 2, True), (left, 2, False))
+        self.faces[FRONT] = np.rot90(self.faces[FRONT], axes=COUNTERCLOCKWISE)
+        self.__swap_z((BOTTOM, 0, True), (RIGHT, 0, False), (TOP, 2, True), (LEFT, 2, False))
 
     def F2(self):
         self.F()
         self.F()
 
     def S(self):
-        self.__swap_z((bottom, 1, False), (left, 1, True), (top, 1, False), (right, 1, True))
+        self.__swap_z((BOTTOM, 1, False), (LEFT, 1, True), (TOP, 1, False), (RIGHT, 1, True))
 
     def S_prime(self):
-        self.__swap_z((bottom, 1, True), (right, 1, False), (top, 1, True), (left, 1, False))
+        self.__swap_z((BOTTOM, 1, True), (RIGHT, 1, False), (TOP, 1, True), (LEFT, 1, False))
 
     def S2(self):
         self.S()

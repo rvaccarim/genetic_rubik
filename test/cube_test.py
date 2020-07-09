@@ -1,6 +1,6 @@
 import unittest
 
-from src.cube import Cube, RED, WHITE, YELLOW, GREEN, ORANGE, BLUE, front, back, left, right, top, bottom
+from src.cube import Cube, FRONT, BACK, LEFT, RIGHT, TOP, BOTTOM
 
 
 class CubeTest(unittest.TestCase):
@@ -32,22 +32,22 @@ class CubeTest(unittest.TestCase):
 
         cube.execute(scramble)
         print(str(cube))
-        self.assertEqual(expected_back, cube.get_face_as_str(back))
-        self.assertEqual(expected_bottom, cube.get_face_as_str(bottom))
-        self.assertEqual(expected_front, cube.get_face_as_str(front))
-        self.assertEqual(expected_left, cube.get_face_as_str(left))
-        self.assertEqual(expected_right, cube.get_face_as_str(right))
-        self.assertEqual(expected_top, cube.get_face_as_str(top))
+        self.assertEqual(expected_back, cube.get_face_as_str(BACK))
+        self.assertEqual(expected_bottom, cube.get_face_as_str(BOTTOM))
+        self.assertEqual(expected_front, cube.get_face_as_str(FRONT))
+        self.assertEqual(expected_left, cube.get_face_as_str(LEFT))
+        self.assertEqual(expected_right, cube.get_face_as_str(RIGHT))
+        self.assertEqual(expected_top, cube.get_face_as_str(TOP))
         self.assertEqual(scramble, cube.get_scramble())
         # rotations
         cube.execute(["x", "x", "x", "x", "y", "y", "y", "y", "z", "z", "z", "z"])
         print(str(cube))
-        self.assertEqual(expected_back, cube.get_face_as_str(back))
-        self.assertEqual(expected_bottom, cube.get_face_as_str(bottom))
-        self.assertEqual(expected_front, cube.get_face_as_str(front))
-        self.assertEqual(expected_left, cube.get_face_as_str(left))
-        self.assertEqual(expected_right, cube.get_face_as_str(right))
-        self.assertEqual(expected_top, cube.get_face_as_str(top))
+        self.assertEqual(expected_back, cube.get_face_as_str(BACK))
+        self.assertEqual(expected_bottom, cube.get_face_as_str(BOTTOM))
+        self.assertEqual(expected_front, cube.get_face_as_str(FRONT))
+        self.assertEqual(expected_left, cube.get_face_as_str(LEFT))
+        self.assertEqual(expected_right, cube.get_face_as_str(RIGHT))
+        self.assertEqual(expected_top, cube.get_face_as_str(TOP))
 
     def test_counterclockwise(self):
         cube = Cube()
@@ -60,44 +60,44 @@ class CubeTest(unittest.TestCase):
         expected_top = "B Y O - O W R - W O W"
 
         cube.execute(scramble)
-        self.assertEqual(expected_back, cube.get_face_as_str(back))
-        self.assertEqual(expected_bottom, cube.get_face_as_str(bottom))
-        self.assertEqual(expected_front, cube.get_face_as_str(front))
-        self.assertEqual(expected_left, cube.get_face_as_str(left))
-        self.assertEqual(expected_right, cube.get_face_as_str(right))
-        self.assertEqual(expected_top, cube.get_face_as_str(top))
+        self.assertEqual(expected_back, cube.get_face_as_str(BACK))
+        self.assertEqual(expected_bottom, cube.get_face_as_str(BOTTOM))
+        self.assertEqual(expected_front, cube.get_face_as_str(FRONT))
+        self.assertEqual(expected_left, cube.get_face_as_str(LEFT))
+        self.assertEqual(expected_right, cube.get_face_as_str(RIGHT))
+        self.assertEqual(expected_top, cube.get_face_as_str(TOP))
         self.assertEqual(scramble, cube.get_scramble())
         # rotations
         cube.execute(["x", "x", "x", "x", "y", "y", "y", "y", "z", "z", "z", "z"])
         print(str(cube))
-        self.assertEqual(expected_back, cube.get_face_as_str(back))
-        self.assertEqual(expected_bottom, cube.get_face_as_str(bottom))
-        self.assertEqual(expected_front, cube.get_face_as_str(front))
-        self.assertEqual(expected_left, cube.get_face_as_str(left))
-        self.assertEqual(expected_right, cube.get_face_as_str(right))
-        self.assertEqual(expected_top, cube.get_face_as_str(top))
+        self.assertEqual(expected_back, cube.get_face_as_str(BACK))
+        self.assertEqual(expected_bottom, cube.get_face_as_str(BOTTOM))
+        self.assertEqual(expected_front, cube.get_face_as_str(FRONT))
+        self.assertEqual(expected_left, cube.get_face_as_str(LEFT))
+        self.assertEqual(expected_right, cube.get_face_as_str(RIGHT))
+        self.assertEqual(expected_top, cube.get_face_as_str(TOP))
 
     def test_scramble1(self):
         cube = Cube()
         cube.execute("D B2 F2 D F' L2 R2 U2 F' L2 U2 B2 F R' U2 B L' B' F2 D' U L2 R2 F2 D L2 U B2 L' R".split(" "))
         print(str(cube))
-        self.assertEqual("R R O - B B G - G Y G", cube.get_face_as_str(back))
-        self.assertEqual("O R B - W Y W - R O O", cube.get_face_as_str(bottom))
-        self.assertEqual("R B B - Y G W - Y G Y", cube.get_face_as_str(front))
-        self.assertEqual("W O Y - O O G - W G G", cube.get_face_as_str(left))
-        self.assertEqual("Y Y W - B R R - R R W", cube.get_face_as_str(right))
-        self.assertEqual("B Y B - W W B - G O O", cube.get_face_as_str(top))
+        self.assertEqual("R R O - B B G - G Y G", cube.get_face_as_str(BACK))
+        self.assertEqual("O R B - W Y W - R O O", cube.get_face_as_str(BOTTOM))
+        self.assertEqual("R B B - Y G W - Y G Y", cube.get_face_as_str(FRONT))
+        self.assertEqual("W O Y - O O G - W G G", cube.get_face_as_str(LEFT))
+        self.assertEqual("Y Y W - B R R - R R W", cube.get_face_as_str(RIGHT))
+        self.assertEqual("B Y B - W W B - G O O", cube.get_face_as_str(TOP))
 
     def test_scramble2(self):
         cube = Cube()
         cube.execute("B2 R' B' L2 U2 B R2 F' L B' F L R2 B F' D2 R2 D' B2 F R2 B D2 B2 R' U2 F2 L' D2 R2".split(" "))
         print(str(cube))
-        self.assertEqual("B B W - O B R - O W B", cube.get_face_as_str(back))
-        self.assertEqual("W Y G - W Y G - R R G", cube.get_face_as_str(bottom))
-        self.assertEqual("O G G - B G R - O B R", cube.get_face_as_str(front))
-        self.assertEqual("B G Y - G O W - Y O G", cube.get_face_as_str(left))
-        self.assertEqual("R R R - B R Y - Y O Y", cube.get_face_as_str(right))
-        self.assertEqual("O O W - W W Y - B Y W", cube.get_face_as_str(top))
+        self.assertEqual("B B W - O B R - O W B", cube.get_face_as_str(BACK))
+        self.assertEqual("W Y G - W Y G - R R G", cube.get_face_as_str(BOTTOM))
+        self.assertEqual("O G G - B G R - O B R", cube.get_face_as_str(FRONT))
+        self.assertEqual("B G Y - G O W - Y O G", cube.get_face_as_str(LEFT))
+        self.assertEqual("R R R - B R Y - Y O Y", cube.get_face_as_str(RIGHT))
+        self.assertEqual("O O W - W W Y - B Y W", cube.get_face_as_str(TOP))
 
     def test_info(self):
         cube = Cube()
