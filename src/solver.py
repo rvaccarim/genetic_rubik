@@ -8,7 +8,7 @@ SINGLE_MOVES = ["U", "U'", "U2", "D", "D'", "D2",
                 "R", "R'", "R2", "L", "L'", "L2",
                 "F", "F'", "F2", "B", "B'", "B2"]
 
-ROTATIONS = ["x", "x'", "x2", "y", "y'", "y2"]
+FULL_ROTATIONS = ["x", "x'", "x2", "y", "y'", "y2"]
 
 ORIENTATIONS = ["z", "z'", "z2"]
 
@@ -99,32 +99,29 @@ class Solver:
 
                     # elitism: the best performers move to the next generation without changes
                     if i > self.elitism_num:
-                        # get a random top performer cube
-                        cloned_cube = Cube()
-                        self.__copy(cloned_cube, cubes[rnd.randint(0, self.elitism_num)])
-                        mutation_type = rnd.randint(0, 5)
+                        # copy a random top performer cube
+                        self.__copy(cubes[i], cubes[rnd.randint(0, self.elitism_num)])
+                        evolution_type = rnd.randint(0, 5)
 
-                        if mutation_type == 0:
-                            cloned_cube.execute(self.__rnd_permutation())
-                        elif mutation_type == 1:
-                            cloned_cube.execute(self.__rnd_permutation())
-                            cloned_cube.execute(self.__rnd_permutation())
-                        elif mutation_type == 2:
-                            cloned_cube.execute(self.__rnd_rotation())
-                            cloned_cube.execute(self.__rnd_permutation())
-                        elif mutation_type == 3:
-                            cloned_cube.execute(self.__rnd_orientation())
-                            cloned_cube.execute(self.__rnd_permutation())
-                        elif mutation_type == 4:
-                            cloned_cube.execute(self.__rnd_rotation())
-                            cloned_cube.execute(self.__rnd_orientation())
-                            cloned_cube.execute(self.__rnd_permutation())
-                        elif mutation_type == 5:
-                            cloned_cube.execute(self.__rnd_orientation())
-                            cloned_cube.execute(self.__rnd_rotation())
-                            cloned_cube.execute(self.__rnd_permutation())
-
-                        self.__copy(cubes[i], cloned_cube)
+                        if evolution_type == 0:
+                            cubes[i].execute(self.__rnd_permutation())
+                        elif evolution_type == 1:
+                            cubes[i].execute(self.__rnd_permutation())
+                            cubes[i].execute(self.__rnd_permutation())
+                        elif evolution_type == 2:
+                            cubes[i].execute(self.__rnd_full_rotation())
+                            cubes[i].execute(self.__rnd_permutation())
+                        elif evolution_type == 3:
+                            cubes[i].execute(self.__rnd_orientation())
+                            cubes[i].execute(self.__rnd_permutation())
+                        elif evolution_type == 4:
+                            cubes[i].execute(self.__rnd_full_rotation())
+                            cubes[i].execute(self.__rnd_orientation())
+                            cubes[i].execute(self.__rnd_permutation())
+                        elif evolution_type == 5:
+                            cubes[i].execute(self.__rnd_orientation())
+                            cubes[i].execute(self.__rnd_full_rotation())
+                            cubes[i].execute(self.__rnd_permutation())
 
             if verbose:
                 print(f"Resetting the world")
@@ -152,9 +149,9 @@ class Solver:
         r = rnd.randint(0, len(PERMUTATIONS) - 1)
         return PERMUTATIONS[r]
 
-    def __rnd_rotation(self):
-        r = rnd.randint(0, len(ROTATIONS) - 1)
-        return [ROTATIONS[r]]
+    def __rnd_full_rotation(self):
+        r = rnd.randint(0, len(FULL_ROTATIONS) - 1)
+        return [FULL_ROTATIONS[r]]
 
     def __rnd_orientation(self):
         r = rnd.randint(0, len(ORIENTATIONS) - 1)
@@ -173,7 +170,7 @@ def main():
     scramble = scramble_str.split(" ")
 
     population_size = 500
-    max_generations = 500
+    max_generations = 300
     max_resets = 10
     elitism_num = 50
 
