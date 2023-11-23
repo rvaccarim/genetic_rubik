@@ -33,7 +33,7 @@ class Cube:
         }
 
         self.moves_lookup = {
-            # hortizontal
+            # horizontal
             "D": self.D, "D'": self.D_prime, "D2": self.D2,
             "E": self.E, "E'": self.E_prime, "E2": self.E2,
             "U": self.U, "U'": self.U_prime, "U2": self.U2,
@@ -124,7 +124,7 @@ class Cube:
         # index 0 = face
         # index 1 = row index
         # This means: put t1 into t2, t2 into t3, t3 into t4, t4 into t1
-        # we do it backwards to avoid unnecesary temporary variables
+        # we do it backwards to avoid unnecessary temporary variables
         backup = np.array(["", "", ""])
         self.__copy_stickers(backup, self.faces[t4[0]][t4[1]])
         self.__copy_stickers(self.faces[t4[0]][t4[1]], self.faces[t3[0]][t3[1]])
